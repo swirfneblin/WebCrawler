@@ -3,6 +3,7 @@
 var fs = require('fs')
 var _ = require('lodash')
 var download = require('download')
+var mkdirp = require('mkdirp')
 
 var _root = './content/'
 var _books = require('./bookinfos.json')
@@ -32,13 +33,24 @@ function start(){
         unlink(_root)
          _total = _books.length
 
-        _.forEach(_books.slice(0,50), function(book) {
-           
-        	download(book.directlink).then(data => {
-              _loaded++
-              console.log('Coletando informações %s % ...', ((_loaded/_total)*100).toFixed(2).toString())
-					    fs.writeFileSync(_root + book.category + "/"+ book.bookname, data);
-					})
+        _.forEach(_books, function(book) {
+           if(book.directlink != "/mobi")
+           {
+              download(book.directlink).then(data => {
+                  _loaded++
+                  
+                  
+                  let dir = _root + book.category
+                  let filename = dir + "/"+ book.bookname + ".mobi"
+                  
+                  mkdirp(dir, function(err){
+                     if (!err){
+                        console.log('Downloading (%s %) => "'+ filename +'"', ((_loaded/_total)*100).toFixed(2).toString())
+                        fs.writeFileSync(filename, data);    
+                     }
+                  })
+              })  
+           }
         })
     }catch(e){
         console.log('start() - erro!')

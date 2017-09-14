@@ -23,6 +23,9 @@ var c = new Crawler({
         let _category = _.toLower(_.lowerCase($("ol.breadcrumb li:nth-child(2) a").text()))
         let _bookname = _.lowerCase($("div.container  h1").text())
         let _link = $(".mt-2 .btn-group:nth-child(1) .dropdown-menu a:nth-child(3)").attr('href')
+        
+        if(_.isEmpty(_link))
+          return
 
         _.forEach(_format, function(format){
             _link = _.replace(_link, '/download/', '/dl/') + "/" + format
