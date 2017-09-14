@@ -1,0 +1,17 @@
+{
+  "name": "getlilvros",
+  "version": "1.0.0",
+  "description": "getlivros",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "crawler": "^1.0.5",
+    "dotenv": "^4.0.0",
+    "download": "^6.2.5",
+    "lodash": "^4.17.4"
+  }
+}
