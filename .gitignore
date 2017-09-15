@@ -59,6 +59,7 @@ typings/
 
 # conteudo do download
 content/
+removidos/
 
 # JSONs de configs coletadas
 bookinfos.json
